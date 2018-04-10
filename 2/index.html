@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Laserpants's Changamoto</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: {
+        scale: 96
+      }
+    });
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css"></link>
+</head>
+<body>
+  <h2>Question:</h2>
+  <p>
+    Using a programming language of your choice, or simple pseudo code, suggest a solution to the following problem.
+  </p>
+  <p>
+    <center>
+      <img src="scale.png" width="350" />
+    </center>
+  </p>
+  <p>
+    A <i>balance scale</i> is a device for weighing. It has a balanced beam and two pans. When the pans contain exactly the same mass, the beam is in balance. Balance scales are used to compare the mass of objects by placing them in one pan, and combinations of standard weights in the other.
+  </p>
+  <h3>Objective</h3>
+  <p>
+    Implement a function, <code>balanceScale(2)</code>, which takes as input:
+  </p>
+  <ul>
+    <li>An array, tuple (pair), or similar data structure, with two positive integers that represent the initial arrangement of weights on the scale. The first element is the weight placed in the left pan, and the second is the weight in the right pan.</li>
+    <li>A non-empty array or collection of available weights, given as positive integers.</li>
+  </ul>
+  <p>
+    The function must choose as few as possible from the available weights to balance the scale. Two weights can be used on the same side of the scale, but you cannot use more than two weights in total. If a solution exists, your function should return two integer arrays (contained in some suitable data structure) with the weights (as integers) to be added in each pan. If it is not possible to balance the scale, then you should return a designated value (like a <code>null</code> object) to indicate this. You may assume that the solution is unique.
+  </p>
+  <h3>Example</h3>
+  <p>
+    Given the arguments \((5, 9)\) and \([1, 2, 6, 7]\), <code>balanceScale</code> should return 6 and 2, e.g., as \(([6], [2])\), since 
+    $$5 + 6 = 11 = 9 + 2,$$
+    and since, in this case, there is no solution using only one of the weights in the list.
+  </p>
+  <ul>
+    <li>Give a brief analysis of the asymptotic runtime complexity of the algorithm.</li>
+    <li>How did you reason to come up with the solution?</li>
+    <li>What would be the next step? Can the solution be further improved?</li>
+  </ul>
+</body>
+<html>
