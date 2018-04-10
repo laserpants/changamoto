@@ -1,8 +1,9 @@
   body {
-    margin: 5em 18em;
+    margin: 5em auto;
     line-height: 145%;
     font-family: sans-serif;
     font-size: 1.0em;
+    width: 700px;
   }
 
   p {
@@ -48,4 +49,8 @@
 
   code {
     font-size: 1.15em;
+  }
+
+  #answer {
+    display: none;
   }
