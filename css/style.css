@@ -45,3 +45,7 @@
   table tr th:last-child {
     border-right: 0;
   }
+
+  code {
+    font-size: 1.15em;
+  }
