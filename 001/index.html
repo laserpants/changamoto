@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Laserpants's Changamoto</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: {
+        scale: 96
+      }
+    });
+  </script>
+  <style type="text/css">
+    body {
+      margin: 5em 18em;
+      line-height: 145%;
+      font-family: sans-serif;
+      font-size: 1.0em;
+    }
+    p {
+      margin-top: 0;
+    }
+    h3, h4 {
+      margin-bottom: 0.5em;
+    }
+    table td {
+      text-align: center;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    table td, table th {
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+    }
+    table tr:first-child th {
+      border-top: 0;
+      padding: 0.3em 0.6em;
+      border-bottom: 1px solid black;
+    }
+    table tr:last-child td {
+      border-bottom: 0;
+    }
+    table tr td:first-child,
+    table tr th:first-child {
+      border-left: 0;
+    }
+    table tr td:last-child,
+    table tr th:last-child {
+      border-right: 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Question:</h2>
+  <p>
+    If \(a\) and \(b\) are two non-negative integers such that \(a + b = 5\), which of the following statements are then always true?
+  </p>
+  <ol>
+    <li>\(a \ne b\)</li>
+    <li>Either \(a > 2\) or \(b > 2\).</li>
+  </ol>
+  <p>
+    Provide a proof to support each claim.
+  </p>
+  <h2>Answer:</h2>
+  <p>
+    Both statements are true.
+  </p>
+  <h3>First statement</h3>
+  <p>
+    If \(a = b\), then \(a + a = 2a = 5\), which means that \(a = 2.5\). This is impossible, since \(a\) was assumed to be an integer.
+  </p>
+  <h3>Second statement</h3>
+  <h4>By contradiction</h4>
+  <p>
+    Let's assume that \(a \le 2\) and \(b \le 2.\) But then \(a + b \le 4.\) So (by De Morgan&rsquo;s laws) therefore either \(a > 2\) or \(b > 2\).
+  </p>
+  <h4>Logic proof</h4>
+  <p>
+    If it is not the case that \(a > 2\), then \(a\) must be strictly less than \(3\). So,
+  </p>
+  <p>
+    <center>
+      \(\lnot(a > 2) \equiv a < 3 \quad\) and \(\quad a < 3 \implies 5 - a > 5 - 3 = 2\).
+    </center>
+  </p>
+  <p>
+    Now, \(a + b = 5 \implies b = 5 - a\), so \(\lnot(a > 2) \implies b > 2\). And this is all we need, since \(\lnot P \implies Q\) is logically equivalent to \(P \vee Q\), as the following truth table shows.
+  </p>
+  <center>
+    <table>
+      <thead>
+        <tr>
+          <th>\(P\)</th>
+          <th>\(Q\)</th>
+          <th>\(P \vee Q\)</th>
+          <th>\(\lnot P\)</th>
+          <th>\(\lnot P \implies Q\)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>\(F\)</td>
+          <td>\(F\)</td>
+          <td>\(\bf{F}\)</td>
+          <td>\(T\)</td>
+          <td>\(\bf{F}\)</td>
+        </tr>
+        <tr>
+          <td>\(F\)</td>
+          <td>\(T\)</td>
+          <td>\(\bf{T}\)</td>
+          <td>\(T\)</td>
+          <td>\(\bf{T}\)</td>
+        </tr>
+        <tr>
+          <td>\(T\)</td>
+          <td>\(F\)</td>
+          <td>\(\bf{T}\)</td>
+          <td>\(F\)</td>
+          <td>\(\bf{T}\)</td>
+        </tr>
+        <tr>
+          <td>\(T\)</td>
+          <td>\(T\)</td>
+          <td>\(\bf{T}\)</td>
+          <td>\(F\)</td>
+          <td>\(\bf{T}\)</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+  <h4>Exhaustion</h4>
+  <p>
+    Although not the most elegant of solutions, simply considering all possible values of \(a\) and \(b\) also serves as a direct proof of both statements. Since \(a\) and \(b\) are non-negative, \(0 \le a, b \le 5\).
+  </p>
+  <center>
+    <table>
+      <thead>
+        <tr>
+          <th>\(a\)</th>
+          <th>\(b\)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>\(0\)</td>
+          <td>\(\bf{5}\)</td>
+        </tr>
+        <tr>
+          <td>\(1\)</td>
+          <td>\(\bf{4}\)</td>
+        </tr>
+        <tr>
+          <td>\(2\)</td>
+          <td>\(\bf{3}\)</td>
+        </tr>
+        <tr>
+          <td>\(\bf{3}\)</td>
+          <td>\(2\)</td>
+        </tr>
+        <tr>
+          <td>\(\bf{4}\)</td>
+          <td>\(1\)</td>
+        </tr>
+        <tr>
+          <td>\(\bf{5}\)</td>
+          <td>\(0\)</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+  <h4>Generalized proof by induction</h4>
+  <p>
+    The statement can be seen as an instance of the more general form,
+    $$
+      \forall a, b, z \in \mathbb{Z}_{\ge 0} : a + b = 2z + 1 \implies a > z \vee b > z,
+    $$
+  </p>
+  <p>
+    with \(z = 2\). Since \(b = 2z + 1 - a\), we can instead phrase this as
+    $$
+      a > z \vee 2z + 1 - a > z.
+    $$
+  </p>
+  <p>
+    The proof will then proceed by induction. Let \(P(n)\) be the proposition that \(n > z\) or \(2z + 1 - n > z\).
+    The base case \(P(0)\) holds, since \(2z + 1 - 0 > z\). It remains to show that \(\forall k \in \mathbb{Z}_{\ge 0} : P(k) \implies P(k + 1)\).
+    So, assuming (by the induction hypothesis) that either \(k > z\) or \(2z + 1 - k > z\) holds, then
+  </p>
+  <ol>
+    <li>if \(k > z\), we have that \(k + 1 > z + 1 > z\), or</li>
+    <li>otherwise \(2z + 1 - k > z\), which means that \(2z + 1 - (k + 1) = 2z - k \ge z\), and therefore either</li>
+    <ul>
+      <li>\(2z + 1 - (k + 1) > z\), or</li>
+      <li>\(2z + 1 - (k + 1) = z\), implying that \(k + 1 = 2z + 1 - z = z + 1 > z\),</li>
+    </ul>
+  </ol>
+  <p>
+    in each case for which \(P(k + 1)\) is true.
+  </p>
+</body>
+<html>
