@@ -83,15 +83,16 @@
     <p>
       The first case is clearly a linear time operation. This is the preferred scenario, so it must be given precedence. For the other two cases, we need to consider all pairs \(\{w, v\}\), typically using a loop-in-a-loop construct of this kind:
     </p>
-    <pre><code class="language-c">for (i = 1; i <= n; i++) {
-    for (j = i + 1; j <= n; j++) {
-      // (i, j)
+    <pre><code class="language-c">for (i = 0; i < n; i++) {
+    for (j = i + 1; j < n; j++) {
+        printf ("(%d, %d)\n", a[i], a[j]);
     }
-  }</code></pre>
+}</code></pre>
     <p>
       Using Haskell's list comprehension syntax:
     </p>
-    <pre><code class="language-haskell">[(a, b) | a <- [1..n], b <- [(a + 1)..n]]</code></pre>
+    <pre><code class="language-haskell">pairs [] = []
+pairs (x:xs) = [(x, x') | x' <- xs] ++ pairs xs</code></pre>
     <p>
       The number of 2-element subsets of an \(n\)-element set is given by the binomial coefficient
       $$
@@ -101,6 +102,7 @@
     <p>
       so the running time is quadratic in the number of weights.
     </p>
+    <h3>Code</h3>
     <p>
       Implementation in the <a href="https://dlang.org/">D language</a>:
     </p>
