@@ -44,7 +44,7 @@ pure Result balanceScale(const Config initial, const int[] weights)
     /* Try two weights: Again, let a and b be the initial weights. Now take all 
      * pairs (w, v) of weights from the input array.
      * 
-     * - If |a - b| = |w - v|, then put w and v in different pans.
+     * - If |a - b| = |w - v|, then put w and v in separate pans.
      * - If |a - b| = w + v, put both w and v in the same pan.
      */
     foreach (i; 0..N)

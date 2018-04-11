@@ -51,6 +51,10 @@
     font-size: 1.15em;
   }
 
+  pre > code {
+    font-size: 0.95em;
+  }
+
   #answer {
     display: none;
   }

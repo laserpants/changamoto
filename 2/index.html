@@ -12,7 +12,15 @@
       }
     });
   </script>
-  <link rel="stylesheet" type="text/css" href="../css/style.css"></link>
+  <script type="text/javascript">
+    function toggleAnswer(e) {
+      e.preventDefault();
+      var div = document.getElementById('answer');
+      div.style.display = (div.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/prism.css" />
 </head>
 <body>
   <h2>Question:</h2>
@@ -40,7 +48,7 @@
   </p>
   <h3>Example</h3>
   <p>
-    Given the arguments \((5, 9)\) and \([1, 2, 6, 7]\), <code>balanceScale()</code> should return 6 and 2, for example as a pair \(([6], [2])\) of arrays, since 
+    Given the arguments \((5, 9)\) and \([1, 2, 6, 7]\), <code>balanceScale()</code> should return 6 and 2, for example as a pair \(([6], [2])\) of arrays, since
     $$5 + 6 = 11 = 9 + 2,$$
     and since, in this case, there is no solution using only one of the weights in the list.
   </p>
@@ -49,5 +57,153 @@
     <li>How did you reason to come up with the solution?</li>
     <li>What would be the next step? Can the solution be further improved?</li>
   </ul>
+  <p>
+    <a href="#" onclick="toggleAnswer(event)">Toggle solution</a>
+  </p>
+  <div id="answer">
+    <h2>Solution:</h2>
+    <p>
+      In the following explanation, let
+    </p>
+    <ul>
+      <li>\(W\) be the set of available weights;</li>
+      <li>\(n = |W|\), that is, the number of weights;</li>
+      <li>\(\binom{W}{2} = \{ S \subset W : |S| = 2 \}\) be the set of all 2-element subsets of \(W\);</li>
+      <li>\(a\) and \(b\) the weights given as the initial configuration of the scale; and</li>
+      <li>\(d\) the absolute value of the difference between these values, i.e., \(d = |a - b|\).</li>
+    </ul>
+    <p>
+      In the solution, we consider three cases:
+    </p>
+    <ol>
+      <li>A single weight is used, in which case we are looking for some \(w \in W\) such that \(w = d\).</li>
+      <li>Two weights are used, both in the same pan. Here we need a pair of weights \(\{w, v\} \in \binom{W}{2}\) such that \(w + v = d\).</li>
+      <li>Two weights are used, but one in each pan. So the pair \(\{w, v\}\) in this case must satisfy \(a + w = b + v\) or \(a + v = b + w\). In other words, \(|w - v| = d\).</li>
+    </ol>
+    <p>
+      The first case is clearly a linear time operation. This is the preferred scenario, so it must be given precedence. For the other two cases, we need to consider all pairs \(\{w, v\}\), typically using a loop-in-a-loop construct of this kind:
+    </p>
+    <pre><code class="language-c">for (i = 1; i <= n; i++) {
+    for (j = i + 1; j <= n; j++) {
+      // (i, j)
+    }
+  }</code></pre>
+    <p>
+      Using Haskell's list comprehension syntax:
+    </p>
+    <pre><code class="language-haskell">[(a, b) | a <- [1..n], b <- [(a + 1)..n]]</code></pre>
+    <p>
+      The number of 2-element subsets of an \(n\)-element set is given by the binomial coefficient
+      $$
+      \binom{n}{2} = \frac{n(n - 1)}{2} \in O(n^2)
+      $$
+    </p>
+    <p>
+      so the running time is quadratic in the number of weights.
+    </p>
+    <p>
+      Implementation in the <a href="https://dlang.org/">D language</a>:
+    </p>
+    <pre><code class="language-d">import std.stdio;
+import std.math: abs;
+import std.algorithm: canFind;
+
+struct Pair(T)
+{
+    T fst;
+    T snd;
+}
+
+alias Pair!(int[]) Result;
+alias Pair!(int)   Config;
+
+pure Result balanceScale(const Config initial, const int[] weights)
+{
+    const ulong N = weights.length;
+
+    /* Absolute value of the difference between the two intial pan weights. */
+    const int d = abs(initial.fst - initial.snd);
+
+    pure Result result(int[] a, int[] b) {
+        return initial.fst > initial.snd ? Result(a, b) : Result(b, a);
+    }
+
+    /* Special case: Is the scale already balanced? */
+    if (0 == d) {
+        return Result([], []);
+    }
+
+    /* Let a and b denote the inital weights placed in the left and right pan.
+     * Then consider the one weight case first: For all weights w,
+     *
+     * - If |a - b| = w then put w in the min(a, b) pan.
+     */
+    foreach (i; 0..N) {
+        const int w = weights[i];
+
+        if (d == w) {
+            return result([], [w]);
+        }
+    }
+
+    /* Try two weights: Again, let a and b be the initial weights. Now take all
+     * pairs (w, v) of weights from the input array.
+     *
+     * - If |a - b| = |w - v|, then put w and v in separate pans.
+     * - If |a - b| = w + v, put both w and v in the same pan.
+     */
+    foreach (i; 0..N) {
+        const int w = weights[i];
+
+        foreach (j; (i + 1)..N) {
+            const int v = weights[j];
+
+            if (d == abs(w - v)) {
+                return result([w], [v]);
+            } else if (d == w + v) {
+                return result([], [w, v]);
+            }
+        }
+    }
+
+    /* Cannot balance the scale. */
+    return Result([-1], [-1]);
+}</code></pre>
+    <p>
+      Implementation in Haskell:
+    </p>
+    <pre><code class="language-haskell">{-# LANGUAGE RecordWildCards #-}
+module Main where
+
+import Control.Applicative ( (<|>) )
+import Control.Monad ( forM_, unless )
+import Data.Function ( (&) )
+import Data.List ( find )
+
+pairs :: [a] -> [(a, a)]
+pairs [] = []
+pairs (x:xs) = [(x, x') | x' <- xs] ++ pairs xs
+
+distance :: Num a => a -> a -> a
+distance w v = abs (w - v)
+
+balanceScale :: (Int, Int) -> [Int] -> Maybe ([Int], [Int])
+balanceScale (fst, snd) weights
+  | 0 == d = pure mempty               -- Is the scale already balanced?
+  | d `elem` weights = balance [] [d]  -- Consider one weight case
+  | otherwise = do                     -- Finally, try two weights
+      (w, v) <- matchDiffBy (+)
+      balance [] [w, v]
+    <|> do
+      (w, v) <- matchDiffBy distance
+      balance [w] [v]
+  where
+    d = distance fst snd
+    balance a b = pure (if fst > snd then (a, b) else (b, a))
+    matchDiffBy op =
+      let eq_d (x, y) = d == x `op` y
+       in pairs weights & find eq_d</code></pre>
+  </div>
+  <script src="../js/prism.js"></script>
 </body>
 <html>

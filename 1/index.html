@@ -13,12 +13,13 @@
     });
   </script>
   <script type="text/javascript">
-    function toggleAnswer() {
+    function toggleAnswer(e) {
+      e.preventDefault();
       var div = document.getElementById('answer');
       div.style.display = (div.style.display === 'block') ? 'none' : 'block';
     }
   </script>
-  <link rel="stylesheet" type="text/css" href="../css/style.css"></link>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
 <body>
   <h2>Question:</h2>
@@ -33,7 +34,7 @@
     Provide a proof to support your claim.
   </p>
   <p>
-    <a href="#" onclick="toggleAnswer()">Toggle answer</a>
+    <a href="#" onclick="toggleAnswer(event)">Toggle answer</a>
   </p>
   <div id="answer">
     <h2>Answer:</h2>
