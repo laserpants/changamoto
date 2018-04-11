@@ -11,7 +11,7 @@ struct Pair(T)
 alias Pair!(int[]) Result;
 alias Pair!(int)   Config;
 
-pure Result balanceScale(Config initial, int[] weights)
+pure Result balanceScale(const Config initial, const int[] weights)
 {
     const ulong N = weights.length;
 
@@ -30,7 +30,7 @@ pure Result balanceScale(Config initial, int[] weights)
     /* Let a and b denote the inital weights placed in the left and right pan.
      * Then consider the one weight case first: For all weights w, 
      * 
-     * - If |a - b| = w then put w in one pan. 
+     * - If |a - b| = w then put w in the min(a, b) pan. 
      */
     foreach (i; 0..N)
     {
@@ -72,9 +72,9 @@ unittest
 {
     struct Test
     {
-        int[]    weights;
-        Config   config;
-        Result[] results;
+        const int[]    weights;
+        const Config   config;
+        const Result[] results;
     }
 
     foreach (Test test; [
