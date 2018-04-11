@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Laserpants's Changamoto</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: {
+        scale: 96
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    function toggleAnswer(e) {
+      e.preventDefault();
+      var div = document.getElementById('answer');
+      div.style.display = (div.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/prism.css" />
+</head>
+<body>
+  <h2>Question:</h2>
+  <p>
+    Here is a state diagram for a finite automaton which takes arbitrary binary strings as input. That is, a DFA defined over the binary alphabet \(\Sigma = \{0, 1\}\). 
+  </p>
+  <p>
+    <center>
+      <img src="dfa.png" />
+    </center>
+  </p>
+  <p>
+    In simple terms, what is the behavior of this automaton. Or more formally; describe the language it accepts. How does the machine respond to the following input strings:
+  </p>
+  <ul>
+    <li><code>100110</code></li>
+    <li><code>101</code></li>
+    <li><code>11</code></li>
+    <li>the empty string</li>
+  </ul>
+  <h3>Bonus question:</h3>
+  <p>
+    Write down the regular expression corresponding to the above DFA?
+  </p>
+  <script src="../js/prism.js"></script>
+</body>
+<html>
