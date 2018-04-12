@@ -81,7 +81,7 @@
       <li>Two weights are used, but one in each pan. So the pair \(\{w, v\}\) in this case must satisfy \(a + w = b + v\) or \(a + v = b + w\). In other words, \(|w - v| = d\).</li>
     </ol>
     <p>
-      The first case is clearly a linear time operation. This is the preferred scenario, so it must be given precedence. For the other two cases, we need to consider all subsets \(\{w, v\}\), typically using a loop-in-a-loop construct of this kind:
+      The first case is clearly a linear time operation. Since we want to choose as few weights as possible; if a one weight solution exists, it must be given precedence. For the other two cases, we need to consider all subsets \(\{w, v\}\), typically using a loop-in-a-loop construct of this kind:
     </p>
     <pre><code class="language-c">for (i = 0; i < n; i++) {
     for (j = i + 1; j < n; j++) {

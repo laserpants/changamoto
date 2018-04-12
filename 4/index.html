@@ -23,9 +23,93 @@
   <link rel="stylesheet" type="text/css" href="../css/prism.css" />
 </head>
 <body>
-  <h2>Question:</h2>
   <p>
-    todo
+    Here is a Java program that implements a simple counter.
+  </p>
+  <pre><code class="language-java">class Counter
+{
+    private int count;
+    
+    public Counter() {
+        this.count = 0;
+    }
+    
+    public int getCount() {
+        return this.count;
+    }
+        
+    public boolean isLessThan(int n) {
+        return this.count < n;
+    }
+
+    public void increment() {
+        this.count += 1;
+    }
+}
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Counter counter = new Counter();
+        
+        while (counter.isLessThan(10)) 
+        {
+            System.out.println(counter.getCount());
+            counter.increment();
+        }
+    }
+}</code></pre>
+  <p>
+    In the following refactored version of the same program, we have instead replaced <code>Counter</code> with a class called <code>ImmutableCounter</code>. Note that we added the <code>final</code> keyword to the <code>count</code> field to make the class immutable. In Java, a field declared <code>final</code> cannot be changed after object instantiation.
+  </p>
+  <pre><code class="language-java">final class ImmutableCounter
+{
+    private final int count;
+    
+    public ImmutableCounter(int count) {
+        this.count = count;
+    }
+    
+    public static ImmutableCounter zero() {
+        return new ImmutableCounter(0);
+    }
+    
+    public int getCount() {
+        return this.count;
+    }
+    
+    public boolean isLessThan(int n) {
+        return this.count < n;
+    }
+
+    /* -------------------------------------------- */    
+    /* 1. Implement method for incrementing counter */
+    /* -------------------------------------------- */    
+}   
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        ImmutableCounter counter = ImmutableCounter.zero();
+        
+        while (counter.isLessThan(10)) {
+            System.out.println(counter.getCount());
+            
+            /* ------------------------- */
+            /* 2. Increment counter here */
+            /* ------------------------- */
+        }
+    }
+}</code></pre>
+  <h3>Question 1:</h3>
+  <p>
+    We can’t modify the counter object, so how would you write the two missing pieces of code, assuming the rest of the program remains the same? <b>Hint:</b> Immutable data structures favor <i>construction</i> over mutation. Look at the <code>zero</code> method for a clue.
+  </p>
+  <h3>Question 2:</h3>
+  <p>
+    What are some advantages of programming with immutable data and implicit state? (For instance, why are Java strings immutable?) Are there any disadvantages?
   </p>
   <script src="../js/prism.js"></script>
 </body>
