@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Laserpants's Changamoto</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: {
+        scale: 96
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    function toggleAnswer(e) {
+      e.preventDefault();
+      var div = document.getElementById('answer');
+      div.style.display = (div.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/prism.css" />
+  <style type="text/css">
+    table.code td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0 1em;
+    }
+  </style>
+</head>
+<body>
+  <h2>Question:</h2>
+  <p>
+    In the following program, <code>dbGetUser</code> and <code>registerUser</code> are non-blocking (asynchronous) function calls. The idea is to first query some database for a <code>user</code> and then call <code>registerUser</code> with the resulting object. <code>registerUser</code> performs various asynchronous operations and takes a callback (continuation) as argument. On completion, <code>registerUser</code> passes a response object to the callback with a boolean property <code>success</code> to indicate the result of registering the user. Finally, the program should take some action based on whether the user was registered or not. 
+  </p>
+  <p>
+    <pre><code class="language-javascript">function callback(user) {
+  registerUser(function(response) {
+    user.registered = response.success;
+  });
+
+  if (user.registered) {
+    sendPandaBearToUser();
+  } else {
+    doSomethingElse();
+  }
+}
+
+/* Program starts here */
+dbGetUser('Bob', callback);</code></pre>
+  </p>
+  <p>
+    But there is a major flaw in this piece of code. What is it?
+  </p>
+  <script src="../js/prism.js"></script>
+</body>
+<html>

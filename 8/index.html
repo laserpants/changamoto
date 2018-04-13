@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Laserpants's Changamoto</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: {
+        scale: 96
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    function toggleAnswer(e) {
+      e.preventDefault();
+      var div = document.getElementById('answer');
+      div.style.display = (div.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/prism.css" />
+  <style type="text/css">
+    table.code td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0 1em;
+    }
+  </style>
+</head>
+<body>
+  <h2>Question:</h2>
+  <p>
+    Here is a recursive C function that returns the n<sup>th</sup> number (zero-indexed) in the Fibonacci series.
+  </p>
+  <p>
+    <pre><code class="language-c">int fib_1 (int n)
+{
+    if (0 == n)
+        return 0;
+    if (1 == n)
+        return 1;
+
+    return fib_1 (n - 1) + fib_1 (n - 2);
+}</code></pre>
+  </p>
+  <p>
+    Calling <code>fib_1</code> with n=42 takes about 2.5 seconds on a test machine with a Core i5 CPU. Now consider the following implementation:
+  </p>
+  <p>
+    <pre><code class="language-c">static int fn (int n, int a, int b)
+{
+    if (0 == n)
+        return a;
+    if (1 == n)
+        return b;
+
+    return fn (n - 1, b, a + b);
+}
+
+int fib_2 (int n)
+{
+    return fn (n, 0, 1);
+}</code></pre>
+  </p>
+  <p>
+    <code>fib_2</code> returns the same result as <code>fib_1</code>, but finishes in less than a millisecond when executed on the same piece of hardware. Why is <code>fib_2</code> significantly more efficient than <code>fib_1</code>?
+  </p>
+  <h3>Bonus question:</h3>
+  <p>
+    Now let’s say that we want to use our implementation of <code>fib_2</code> to print out the first 50 Fibonacci numbers. Here is a simple for-loop to achieve this:
+  </p>
+  <p>
+    <pre><code class="language-c">for (i = 0; i < 50; ++i) {
+    printf ("%d\n", fib_2 (i));
+}</code></pre>
+  </p>
+  <p>
+Why is this a suboptimal solution? What would be a better approach?
+  <p>
+  </p>
+  <script src="../js/prism.js"></script>
+</body>
+<html>

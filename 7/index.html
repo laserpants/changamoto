@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Laserpants's Changamoto</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: {
+        scale: 96
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    function toggleAnswer(e) {
+      e.preventDefault();
+      var div = document.getElementById('answer');
+      div.style.display = (div.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/prism.css" />
+  <style type="text/css">
+    table.code td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0 1em;
+    }
+  </style>
+</head>
+<body>
+  <h2>Question:</h2>
+  <p>
+    Referential transparency is a property of a program expression which states that it always produces the same output for a given input value. Just like mathematical functions, referentially transparent expressions in a program map each value (input) in the domain to exactly one element (return value) of the codomain. Which of the following Python functions are referentially transparent? Keep in mind that referential transparency does not imply absence of side-effects.
+  </p>
+  <p>
+    <pre><code class="language-python">function callback(user) {
+def fun_1(x, y):
+    return x + y
+
+def fun_2(name):
+    file = open(name, 'r')
+    data = file.read()  # Read file contents to variable 'data'
+    file.close()
+    return data
+
+def fun_3(x):
+    launchRocket()  # Function that sends a rocket to the moon
+    return x</code></pre>
+  </p>
+  <h3>Bonus question:</h3>
+  <p>
+    A function that doesn’t exhibit side-effects is called <i>pure.</i> As already mentioned, referential transparency does not imply purity. But is the opposite true? That is to say; does purity imply referential transparency?
+  </p>
+  <script src="../js/prism.js"></script>
+</body>
+<html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Laserpants's Changamoto</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: {
+        scale: 96
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    function toggleAnswer(e) {
+      e.preventDefault();
+      var div = document.getElementById('answer');
+      div.style.display = (div.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/prism.css" />
+  <style type="text/css">
+    table.code td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0 1em;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    <i>This question is about functional programming. It assumes prior knowledge in at least one purely functional language.</i>
+  </p>
+  <h2>Question:</h2>
+  <p>
+    A polynomial 
+    $$
+      a_nx^n + a_{(n - 1)}x^{(n-1)} + \cdots + a_1x + a_0
+    $$
+    with integer coefficients \(a0, a1, \dots, a_n\) can be represented by a list or list-like structure (depending on the programming language of choice). For example, 
+    $$
+      p(x) = 5x^3 - 7x^2 + 2x + 10
+    $$
+    translates into the list <code>[10, 2, -7, 5]</code>. (From left to right, one starts with the constant term and ends with the leading coefficient.) Now consider a function <code>eval()</code>, which takes an integer \(x_0\), and a list of coefficients \(a_0, a_1, \dots, a_n\), and evaluates the polynomial \(a_nx^n + \dots + a_1x + a_0\) at the point \(x_0\). Below are two implementations of this function, one in OCaml, and one in Haskell.
+  </p>
+  <p>
+    <center>
+      <table class="code">
+        <thead>
+          <tr>
+            <th>OCaml</th>
+            <th>Haskell</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <pre><code>open Batteries
+
+let eval : int -> int list -> int = fun x ->
+  let rec ev i coeffs = 
+    match coeffs with 
+    | [] -> 0
+    | (c :: cs) -> c*Int.pow x i + ev (i+1) cs 
+  in ev 0
+
+let main = (* calculate p(4) *)
+  let p = [10; 2; -7; 5]
+    in print_int (eval 4 p)</code></pre>
+            </td>
+            <td>
+              <pre><code>module Poly where
+
+eval :: Int -> [Int] -> Int
+eval x = ev 0 where 
+  ev i coeffs = 
+    case coeffs of
+      [] -> 0
+      (c:cs) -> c*x^i + ev (i+1) cs
+
+p = [10, 2, -7, 5]
+
+-- calculate p(4)
+main = print (eval 4 p)</code></pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+  </p>
+  <p>
+    There is, however, a more efficient algorithm for this, known as Horner’s method. Using repeated application of the distributive law, we can derive the following sequence of progressive rearrangements of the expression:
+    $$
+      a_0 + a_1x + \cdots + a_nx^n \\
+      = a_0 + x(a_1 + a_2x + \cdots + a_nx^{(n-1)}) \\ 
+      = a_0 + x(a_1 + x(a_2 + a_3x + \cdots + a_nx^{(n-2)})) \\ 
+      = a_0 + x(a_1 + x(a_2 + x(a_3 + \cdots + x(a_n + 0) \cdots ))) \\ 
+    $$
+  </p>
+  <p>
+    This lends itself naturally to a list processing pattern in functional programming, known as a fold. The fold (or reduce) family of higher-order functions reduces a collection to a single value using a combining function, and an initial value (named \(z\) in the below diagram). 
+  </p>
+  <p>
+    <center>
+      <img src="fold.png" />
+    </center>
+  </p>
+  <p>
+    In OCaml, <code>List.fold_right</code> has the type signature 
+  </p>
+  <p>
+    <center>
+      <pre>('a -> 'b -> 'b) -> 'a list -> 'b -> 'b</pre>
+    </center>
+  </p>
+  <p>
+    and Haskell's <code>foldr</code>
+  </p>
+  <p>
+    <center>
+      <pre>foldr :: (a -> b -> b) -> b -> [a] -> b</pre>
+    </center>
+  </p>
+  <p>
+    (here specialized to lists) serves the same purpose. 
+  </p>
+  <p>
+    Write, or sketch out, a function that 
+  </p>
+  <ul>
+    <li>behaves like (i.e., is <i>extensionally</i> equivalent to) <code>eval()</code> but</li>
+    <li>takes advantage of Horner’s rule, and</li>
+    <li>is implemented in terms of a right fold.</li>
+  </ul>
+  <script src="../js/prism.js"></script>
+</body>
+<html>
