@@ -33,7 +33,7 @@
     </center>
   </p>
   <p>
-    In simple terms, what is the behavior of this automaton? Or more formally; describe the language it accepts. How does the machine respond to the following input strings:
+    In simple terms, what is the behavior of this automaton? Or more formally: describe the language it accepts. How does the machine respond to the following input strings?
   </p>
   <ul>
     <li><code>100110</code></li>
@@ -41,10 +41,19 @@
     <li><code>11</code></li>
     <li>the empty string</li>
   </ul>
-  <h3>Bonus question:</h3>
+  <h3>Bonus challenge:</h3>
   <p>
-    Write down the regular expression corresponding to the above DFA?
+    Write down the regular expression corresponding to the above DFA.
   </p>
+  <p>
+    <a href="#" onclick="toggleAnswer(event)">Toggle answer</a>
+  </p>
+  <div id="answer">
+    <h2>Answer:</h2>
+    <p>
+      It accepts all strings with an even number of zeros. Of those in the list, only the last two are accepted. The equivalent regexp is <code>/^((1*)0(1*)0(1*))*$/</code>.
+    </p>
+  </div>
   <script src="../js/prism.js"></script>
 </body>
 <html>
