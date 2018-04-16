@@ -111,20 +111,25 @@ public class Main
   <p>
     What are some advantages of programming with immutable data and implicit state? (For instance, why are Java strings immutable?) Are there any disadvantages? I guess that was more than one question :)
   </p>
-  <h3>Solution:</h3>
-  <h4>Question 1</h4>
   <p>
-    <pre><code class="language-java">public ImmutableCounter next() {
-    return new ImmutableCounter(this.count + 1);
+    <a href="#" onclick="toggleAnswer(event)">Toggle answer</a>
+  </p>
+  <div id="answer">
+    <h3>Solution:</h3>
+    <h4>Question 1</h4>
+    <p>
+      <pre><code class="language-java">public ImmutableCounter next() {
+      return new ImmutableCounter(this.count + 1);
 }</code></pre>
-  </p>
-  <p>
-    <pre><code class="language-java">counter = counter.next();</code></pre>
-  </p>
-  <h4>Question 2</h4>
-  <p>
-    Immutability eliminates side-effects, which makes code easier to reason about and to test. Immutable objects are inherently thread-safe. A disadvantage is that it can be more difficult to write time- and resource-efficient code using immutable data.
-  </p>
+    </p>
+    <p>
+      <pre><code class="language-java">counter = counter.next();</code></pre>
+    </p>
+    <h4>Question 2</h4>
+    <p>
+      Immutability eliminates side-effects, which makes code easier to reason about and to test. Immutable objects are inherently thread-safe. A disadvantage is that it can be more difficult to write time- and resource-efficient code using immutable data.
+    </p>
+  </div>
   <script src="../js/prism.js"></script>
 </body>
 <html>
