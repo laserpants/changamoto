@@ -36,7 +36,7 @@
   </p>
   <p>
     <pre><code class="language-javascript">function callback(user) {
-  registerUser(function(response) {
+  registerUser(user, function(response) {
     user.registered = response.success;
   });
 

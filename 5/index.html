@@ -134,6 +134,19 @@ main = print (eval 4 p)</code></pre>
     <li>takes advantage of Horner’s rule, and</li>
     <li>is implemented in terms of a right fold.</li>
   </ul>
+  <p>
+    <a href="#" onclick="toggleAnswer(event)">Toggle answer</a>
+  </p>
+  <div id="answer">
+    <h3>Solution:</h3>
+    <p>
+      Below is an implementation of <code>eval</code> in Haskell. (<code>foldr1</code> is a variant of <code>foldr</code> with no base case.)
+    </p>
+    <p>
+      <pre><code class="language-haskell">eval' :: (Num a, Foldable t) => a -> t a -> a
+eval' x = foldr1 f where f a c = a + x*c</code></pre>
+    </p>
+  </div>
   <script src="../js/prism.js"></script>
 </body>
 <html>
