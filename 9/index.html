@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Laserpants's Changamoto</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: {
+        scale: 96
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    function toggleAnswer(e) {
+      e.preventDefault();
+      var div = document.getElementById('answer');
+      div.style.display = (div.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/prism.css" />
+  <style type="text/css">
+    table.code td {
+      text-align: left;
+      ical-align: top;
+      padding: 0 1em;
+    }
+  </style>
+</head>
+<body>
+  <h2>Question:</h2>
+  <p>
+    Prove that if \(a\) and \(b\) are two relatively prime integers, and we have some integer \(c\), such that \(c \mid a\), then \(c\) and \(b\) are relatively prime.
+  </p>
+  <p>
+    <a href="#" onclick="toggleAnswer(event)">Toggle answer</a>
+  </p>
+  <div id="answer">
+    <h3>Solution:</h3>
+    <p>
+      Let \(\gcd(c, b) = d\). Then
+      $$
+        d \mid b \text{ and } d \mid c.
+      $$
+      Given that \(c \mid a\), we have that 
+      $$
+        d \mid c \text{ and } c \mid a \implies d \mid a
+      $$
+      by the transitivity property of divisibility. This means that \(d\) is a common divisor of \(a\) and \(b\). Since every common divisor divides the gcd, \(d \mid \gcd(a, b) = 1\), it must be that \(d = 1\). 
+    </p>
+    <p>
+      This proves that \(\gcd(c, b) = 1\). That is, \(c\) and \(b\) are relatively prime.
+    </p>
+  </div>
+  <script src="../js/prism.js"></script>
+</body>
+<html>
