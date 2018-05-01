@@ -53,6 +53,25 @@ dbGetUser('Bob', callback);</code></pre>
   <p>
     But there is a major flaw in this piece of code. What is it?
   </p>
-  <script src="../js/prism.js"></script>
+  <p>
+    <a href="#" onclick="toggleAnswer(event)">Toggle answer</a>
+  </p>
+  <div id="answer">
+    <h3>Answer:</h3>
+    <p>
+      Since <code>registerUser</code> returns immediately, checking the <code>registered</code> property on the <code>user</code> object presents a race condition in the above code (the callback may or may not have been invoked at the time the if-statement is executed). Moving the relevant portion of the code to inside the callback solves the problem:
+    </p>
+    <p>
+      <pre><code class="language-javascript">registerUser(user, function(response) {
+  user.registered = response.success;
+  if (user.registered) {
+    sendPandaBearTo(user);
+  } else {
+    doSomethingElse();
+  }
+});</code></pre>
+    </p>
+  </div>
+   <script src="../js/prism.js"></script>
 </body>
 <html>
