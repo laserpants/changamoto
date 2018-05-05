@@ -64,10 +64,10 @@ def fun_3(x):
       </blockquote>
     </p>
     <p>
-    The fact that <code>fun_3</code> sends rockets to the moon doesn't change its behavior with regard to this. It does, however, mean that <code>fun_3</code> is not <i>pure</i>. Let's think of it as an effectful <a href="https://en.wikipedia.org/wiki/Identity_function">identity function</a>. <code>fun_1</code> is both referentially transparent and pure.
+    The fact that <code>fun_3</code> sends rockets to the moon doesn't change its behavior with regard to this property. It does, however, mean that <code>fun_3</code> is not <i>pure</i>. Let's think of it as an effectful <a href="https://en.wikipedia.org/wiki/Identity_function">identity function</a>. <code>fun_1</code>, on the other hand, is both referentially transparent and pure.
     </p>
     <p>
-    The answer to the bonus question is yes; purity does imply referentially transparent. In other words, purity is a stronger guarantee than referential transparency. Thinking about it, a function that is pure behaves truly like a black box and has no way to interact with the outside world. All it can do is to act on its input. Therefore, the return value is not influenced by anything else than the arguments it is given as input.
+    The answer to the bonus question is yes; purity <i>does</i> imply referentially transparent. In other words, purity is a stronger guarantee than referential transparency. Thinking about it, a function that is pure behaves truly like a black box and has no way to interact with the outside world. All it can do is to act on its input. Therefore, the return value is not influenced by anything else than the arguments it is given as input.
     </p>
   </div>
   <script src="../js/prism.js"></script>
