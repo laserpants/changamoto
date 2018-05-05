@@ -52,6 +52,24 @@ def fun_3(x):
   <p>
     A function that doesn’t exhibit side-effects is called <i>pure.</i> As already mentioned, referential transparency does not imply purity. But is the opposite true? That is to say; does purity imply referential transparency?
   </p>
+  <p>
+    <a href="#" onclick="toggleAnswer(event)">Toggle answer</a>
+  </p>
+  <div id="answer">
+    <h3>Answer:</h3>
+    <p>
+    The first and the last functions are referentially transparent. 
+      <blockquote>
+        A function is a binary relation that associates at most one range element to any domain element.
+      </blockquote>
+    </p>
+    <p>
+    The fact that <code>fun_3</code> sends rockets to the moon doesn't change its behavior with regard to this. It does, however, mean that <code>fun_3</code> is not <i>pure</i>. Let's think of it as an effectful <a href="https://en.wikipedia.org/wiki/Identity_function">identity function</a>. <code>fun_1</code> is both referentially transparent and pure.
+    </p>
+    <p>
+    The answer to the bonus question is yes; purity does imply referentially transparent. In other words, purity is a stronger guarantee than referential transparency. Thinking about it, a function that is pure behaves truly like a black box and has no way to interact with the outside world. All it can do is to act on its input. Therefore, the return value is not influenced by anything else than the arguments it is given as input.
+    </p>
+  </div>
   <script src="../js/prism.js"></script>
 </body>
 <html>
